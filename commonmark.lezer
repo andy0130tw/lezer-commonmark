@@ -1,0 +1,37 @@
+@top Root { block* }
+@precedence { cut @cut }
+
+block {
+  ThematicBreak |
+  IndentedCodeBlock |
+  GenericBlock |
+  blankLine+
+}
+
+IndentedCodeBlock {
+  (blockIndent Line)+
+}
+
+GenericBlock {
+  Line+
+}
+
+Line { nonIndentSpaces? anytext lineBreak }
+
+ThematicBreak {
+  nonIndentSpaces?
+  thematicBreakInner
+  lineBreak
+}
+
+@external tokens scanLineStart from './tokens' { nonIndentSpaces, blockIndent, blankLine }
+@external tokens scanThematicBreak from './tokens' { thematicBreakInner }
+
+@tokens {
+  whitespace { std.whitespace }
+  asciiWhitespace { $[ \t\n\v\f\r] }
+  asciiPunctuation { $[\u{21}-\u{2f}\u{3a}-\u{40}\u{5b}-\u{60}\u{7b}-\u{7e}] }
+
+  anytext { $[\u{20}-\u{10ffff}]+ }
+  lineBreak { "\n" | "\r" "\n"? }
+}

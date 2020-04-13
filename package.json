@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "build": "lezer-generator --output parsers/commonmark commonmark.lezer",
+    "start": "node -r esm repl.js",
+    "dev": "nodemon --exec 'yarn build' -e lezer"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "lezer": "^0.8.3"
+  },
+  "devDependencies": {
+    "lezer-generator": "^0.8.3",
+    "nodemon": "^2.0.3"
+  }
+}
