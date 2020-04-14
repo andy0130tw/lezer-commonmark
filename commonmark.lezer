@@ -1,11 +1,32 @@
-@top Root { block* }
+@top Document { block* }
 @precedence { cut @cut }
 
 block {
+  AtxHeading |
   ThematicBreak |
   IndentedCodeBlock |
   GenericBlock |
   blankLine+
+}
+
+AtxHeading {
+  nonIndentSpaces?
+  atxHeadingMarkerChoice
+  AtxHeadingText { text }
+  // FIXME: optional trailings
+  lineBreak
+}
+
+// workaround; FIXME, will recognize 7 # as atx heading
+atxHeadingMarkerTmpl<n, str> { _a[name=AtxHeadingMarker{n}] { str } seps }
+
+atxHeadingMarkerChoice {
+  atxHeadingMarkerTmpl<1, "#"> |
+  atxHeadingMarkerTmpl<2, "##"> |
+  atxHeadingMarkerTmpl<3, "###"> |
+  atxHeadingMarkerTmpl<4, "####"> |
+  atxHeadingMarkerTmpl<5, "#####"> |
+  atxHeadingMarkerTmpl<6, "######">
 }
 
 IndentedCodeBlock {
@@ -16,7 +37,7 @@ GenericBlock {
   Line+
 }
 
-Line { nonIndentSpaces? anytext lineBreak }
+Line { nonIndentSpaces? anything lineBreak }
 
 ThematicBreak {
   nonIndentSpaces?
@@ -24,14 +45,21 @@ ThematicBreak {
   lineBreak
 }
 
-@external tokens scanLineStart from './tokens' { nonIndentSpaces, blockIndent, blankLine }
+lineBreak { newline | eof }
+
+@external tokens scanLineStart from './tokens' { nonIndentSpaces, blockIndent, blankLine, eof }
 @external tokens scanThematicBreak from './tokens' { thematicBreakInner }
 
 @tokens {
   whitespace { std.whitespace }
   asciiWhitespace { $[ \t\n\v\f\r] }
   asciiPunctuation { $[\u{21}-\u{2f}\u{3a}-\u{40}\u{5b}-\u{60}\u{7b}-\u{7e}] }
+  newline { "\n" | "\r" "\n"? }
 
-  anytext { $[\u{20}-\u{10ffff}]+ }
-  lineBreak { "\n" | "\r" "\n"? }
+  seps { $[ \t]+ }
+
+  text { $[\u{20}-\u{10ffff}]+ }
 }
+
+// must be place last
+@external tokens eatAnything from './tokens' { anything }

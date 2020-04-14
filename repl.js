@@ -30,13 +30,13 @@ function parse(src) {
   function getExpr(node, level=0) {
     const arr = []
     const repr = `${node.repr()}: "${src.substring(node.start, node.end).replace(/\n/g, '↵')}"`
-    const indent = ' '.repeat(level * 2) + '* '
+    const indent = ' '.repeat(level * 2)
 
     if (node.error) {
       // id == 0 can be treated as an error?
-      arr.push(indent + '[ERROR] ' + repr)
+      arr.push(indent + '! [ERROR] ' + repr)
     } else {
-      arr.push(indent + repr)
+      arr.push(indent + '* ' + repr)
     }
 
     // is it terminal?

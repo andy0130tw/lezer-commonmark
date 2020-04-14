@@ -1,14 +1,26 @@
 import { ExternalTokenizer } from 'lezer'
-import { blankLine, nonIndentSpaces, blockIndent, thematicBreakInner } from './commonmark.terms.js'
+import { anything, nonIndentSpaces, blockIndent, blankLine, eof, thematicBreakInner } from './commonmark.terms.js'
 
-const SPC = ' '.codePointAt(),
-      TAB = '\t'.charCodeAt(),
-      CR = '\r'.codePointAt(),
-      LF = '\n'.codePointAt()
+const SPC = ' ' .codePointAt(),
+      TAB = '\t'.codePointAt(),
+      CR  = '\r'.codePointAt(),
+      LF  = '\n'.codePointAt()
+
+/* to accept anything as the last resort */
+export const eatAnything = new ExternalTokenizer((input, token) => {
+  let pos = token.start
+  while (input.get(pos) >= 32) pos++
+  if (pos != token.start) {
+    return token.accept(anything, pos);
+  }
+})
 
 export const scanLineStart = new ExternalTokenizer((input, token, stack) => {
   let pos = token.start
   let cnt = 0
+  if (input.get(pos) < 0) {
+    return token.accept(eof, pos)
+  }
   while (1) {
     const c = input.get(pos++)
     if (c == SPC) cnt++
