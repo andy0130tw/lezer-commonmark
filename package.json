@@ -6,10 +6,10 @@
   },
   "dependencies": {
     "esm": "^3.2.25",
-    "lezer": "^0.8.3"
+    "lezer": "^0.8.4"
   },
   "devDependencies": {
-    "lezer-generator": "^0.8.3",
+    "lezer-generator": "^0.8.4",
     "nodemon": "^2.0.3"
   }
 }

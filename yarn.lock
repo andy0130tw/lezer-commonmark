@@ -453,10 +453,10 @@ latest-version@^5.0.0:
   dependencies:
     package-json "^6.3.0"
 
-lezer-generator@^0.8.3:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/lezer-generator/-/lezer-generator-0.8.3.tgz#b889b018af070b64faa0c1c0de97bc09d292c37c"
-  integrity sha512-PikTCLnbY6tKKRaaCds8SBzaFh56K7gkG8ilvNLEsmCyiWXjWKQ+FOE3N2I12K3XOt1HhqlLYY/El7v+2b+iwA==
+lezer-generator@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/lezer-generator/-/lezer-generator-0.8.4.tgz#37140b5f967c6adb5e0b5fcd7da442b5eded341b"
+  integrity sha512-Skdcgc1TY+lIQN/8RviyLymA/Y7KRN2jib52hhu9dzBf1Umk/VZEuF9KTz3wlV0vGn12csmJRX62HfqfkIRUNQ==
   dependencies:
     lezer "^0.8.0"
 
@@ -465,10 +465,17 @@ lezer-tree@^0.8.0:
   resolved "https://registry.yarnpkg.com/lezer-tree/-/lezer-tree-0.8.4.tgz#aaf65ebbbb2296d65e3ed079dce1c26631ff9f91"
   integrity sha512-gg9WYNa7xM1rhHRX+z2NaqhUxi1dndtdo3htqfazHXeFKzaR8hK1lT2pQYdFxWvtFbY0W9aG/VQn77jHuhu86g==
 
-lezer@^0.8.0, lezer@^0.8.3:
+lezer@^0.8.0:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/lezer/-/lezer-0.8.3.tgz#79aac81ef2dfd85d14df4c8f609b1baf0aec9637"
   integrity sha512-0urXjVwIji6hG5h+mxjzVq+oVyA+ji1NVFFR6CQ9nWp4n/YPSFHisqU4pWQBUTUoaOzdIgTau3m/X5ebhN7jEQ==
+  dependencies:
+    lezer-tree "^0.8.0"
+
+lezer@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/lezer/-/lezer-0.8.4.tgz#1a413a9fe7c84400ca7b82d87ffb0fc468c0d95f"
+  integrity sha512-5BuqEk4avZ3GtGig3xbZ2kLZriCI6NLZ/lCheDhLQietncrpOLdUCOZ8veTYGn0JN23di+PI4HlJyJtlmxH54A==
   dependencies:
     lezer-tree "^0.8.0"
 
